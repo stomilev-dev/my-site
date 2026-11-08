@@ -2239,21 +2239,17 @@
 
         <div class="field" id="customFillingField" style="display: none;">
             <label>Желаемая начинка для заказного торта</label>
-            <div class="branch-box" id="orderFillingDropdown" onclick="toggleOrderFillingDropdown(event)" style="padding: 10px 12px; border-radius: 12px; width: 100%;">
-                <div class="custom-select-trigger" id="orderFillingTrigger" style="width: 100%; justify-content: space-between;">Посоветуйте / Обсудить с кондитером <span>▼</span></div>
-                <div class="custom-select-options" style="width: 100%; top: calc(100% + 4px); max-height: 220px; overflow-y: auto;">
-                    <div onclick="selectOrderFilling('Обсудить с кондитером', 'Посоветуйте / Обсудить с кондитером')">Посоветуйте / Обсудить с кондитером</div>
-                    <div onclick="selectOrderFilling('Сникерс', 'Сникерс (карамель, арахис, чиз-крем)')">Сникерс (карамель, арахис, чиз-крем)</div>
-                    <div onclick="selectOrderFilling('Ванильно-ягодный', 'Ванильно-ягодный (клубника, малина)')">Ванильно-ягодный (клубника, малина)</div>
-                    <div onclick="selectOrderFilling('Фисташка-малина', 'Фисташка с ягодной прослойкой')">Фисташка с ягодной прослойкой</div>
-                    <div onclick="selectOrderFilling('Красный бархат', 'Красный бархат')">Красный бархат</div>
-                    <div onclick="selectOrderFilling('Молочная девочка', 'Молочная девочка')">Молочная девочка</div>
-                    <div onclick="selectOrderFilling('Шоколадно-ягодный', 'Шоколадно-ягодный')">Шоколадно-ягодный</div>
-                    <div onclick="selectOrderFilling('Орео', 'Орео с бельгийским шоколадом')">Орео с бельгийским шоколадом</div>
-                    <div onclick="selectOrderFilling('Тропиканка (манго)', 'Тропиканка (манго-карамель)')">Тропиканка (манго-карамель)</div>
-                </div>
-            </div>
-            <input type="hidden" id="orderFilling" value="Обсудить с кондитером">
+            <select id="orderFilling">
+                <option value="Обсудить с кондитером">Посоветуйте / Обсудить с кондитером</option>
+                <option value="Сникерс">Сникерс (карамель, арахис, чиз-крем)</option>
+                <option value="Ванильно-ягодный">Ванильно-ягодный (клубника, малина)</option>
+                <option value="Фисташка-малина">Фисташка с ягодной прослойкой</option>
+                <option value="Красный бархат">Красный бархат</option>
+                <option value="Молочная девочка">Молочная девочка</option>
+                <option value="Шоколадно-ягодный">Шоколадно-ягодный</option>
+                <option value="Орео">Орео с бельгийским шоколадом</option>
+                <option value="Тропиканка (манго)">Тропиканка (манго-карамель)</option>
+            </select>
         </div>
 
         <div class="field">
@@ -2301,18 +2297,14 @@
         </div>
         <div class="field">
             <label>Пожелания по начинке</label>
-            <div class="branch-box" id="customFillingDropdown" onclick="toggleCustomFillingDropdown(event)" style="padding: 10px 12px; border-radius: 12px; width: 100%;">
-                <div class="custom-select-trigger" id="customFillingTrigger" style="width: 100%; justify-content: space-between;">Хочу обсудить с кондитером <span>▼</span></div>
-                <div class="custom-select-options" style="width: 100%; top: calc(100% + 4px); max-height: 220px; overflow-y: auto;">
-                    <div onclick="selectCustomFilling('Хочу обсудить с кондитером')">Хочу обсудить с кондитером</div>
-                    <div onclick="selectCustomFilling('Сникерс')">Сникерс</div>
-                    <div onclick="selectCustomFilling('Красный бархат')">Красный бархат</div>
-                    <div onclick="selectCustomFilling('Ванильно-ягодная')">Ванильно-ягодная</div>
-                    <div onclick="selectCustomFilling('Шоколадная')">Шоколадная</div>
-                    <div onclick="selectCustomFilling('Фисташковая')">Фисташковая</div>
-                </div>
-            </div>
-            <input type="hidden" id="customFilling" value="Хочу обсудить с кондитером">
+            <select id="customFilling">
+                <option value="Хочу обсудить с кондитером">Хочу обсудить с кондитером</option>
+                <option value="Сникерс">Сникерс</option>
+                <option value="Красный бархат">Красный бархат</option>
+                <option value="Ванильно-ягодная">Ванильно-ягодная</option>
+                <option value="Шоколадная">Шоколадная</option>
+                <option value="Фисташковая">Фисташковая</option>
+            </select>
         </div>
         <div class="field">
             <label>Тематика и пожелания к декору</label>
@@ -3358,33 +3350,6 @@
         }
     }
 
-    function toggleCustomFillingDropdown(e) {
-        if (e) e.stopPropagation();
-        document.getElementById('customFillingDropdown').classList.toggle('open');
-    }
-
-    function selectCustomFilling(val) {
-        document.getElementById('customFilling').value = val;
-        document.getElementById('customFillingTrigger').innerHTML = val + ' <span>▼</span>';
-    }
-
-    function toggleOrderFillingDropdown(e) {
-        if (e) e.stopPropagation();
-        document.getElementById('orderFillingDropdown').classList.toggle('open');
-    }
-
-    function selectOrderFilling(val, label) {
-        document.getElementById('orderFilling').value = val;
-        document.getElementById('orderFillingTrigger').innerHTML = label + ' <span>▼</span>';
-    }
-
-    document.addEventListener('click', function() {
-        var f1 = document.getElementById('customFillingDropdown');
-        var f2 = document.getElementById('orderFillingDropdown');
-        if (f1) f1.classList.remove('open');
-        if (f2) f2.classList.remove('open');
-    });
-
     function sendToMax() {
         var txt = buildOrderText();
         if (!txt) return;
@@ -3393,7 +3358,7 @@
         }
         showToast('Заказ скопирован! Вставьте его в чат MAX');
         setTimeout(function() {
-            window.open('https://max.ru/u/f9LHodD0cOI-yMMLY2nEBVFbkyWyjQQ4W1re7uPoCR3WpzPUHwTpRsaGUSQ', '_blank');
+            window.open('https://max.ru/join/ArlJGNCyAhhl3nFDkzHAYiQaUaU1a5t0krTVWmt0hXk', '_blank');
         }, 600);
     }
 
@@ -3439,7 +3404,7 @@
         if (navigator.clipboard) navigator.clipboard.writeText(msg);
         showToast('Заявка скопирована! Вставьте её в чат MAX');
         setTimeout(function() {
-            window.open('https://max.ru/u/f9LHodD0cOI-yMMLY2nEBVFbkyWyjQQ4W1re7uPoCR3WpzPUHwTpRsaGUSQ', '_blank');
+            window.open('https://max.ru/join/ArlJGNCyAhhl3nFDkzHAYiQaUaU1a5t0krTVWmt0hXk', '_blank');
         }, 600);
     }
 
