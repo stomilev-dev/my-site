@@ -18,6 +18,11 @@
     
     <!-- Иконка вкладки сайта -->
     <link rel="icon" type="image/jpeg" href="logo.jpg">
+    
+    <!-- Фирменный шрифт логотипа (Kurale + Yeseva One) и современный шрифт интерфейса (Manrope) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kurale&family=Manrope:wght@400;500;600;700;800&family=Yeseva+One&display=swap" rel="stylesheet">
 
     <!-- Микроразметка Schema.org для поисковых систем -->
     <script type="application/ld+json">
@@ -58,7 +63,138 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-ui); -webkit-tap-highlight-color: transparent; }
         html { scroll-behavior: smooth; }
-        body { background: var(--bg-cream); color: var(--text-main); padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)); overflow-x: hidden; }
+        body {
+            background-color: var(--bg-cream);
+            background-image: 
+                linear-gradient(180deg, rgba(250, 247, 245, 0.84) 0%, rgba(249, 241, 245, 0.78) 50%, rgba(250, 247, 245, 0.88) 100%),
+                url('bg-mothers-day.jpg');
+            background-size: cover;
+            background-position: center top;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: var(--text-main);
+            padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+            overflow-x: hidden;
+        }
+
+        /* Гармоничные цветочные акценты и стили ко Дню матери */
+        .section-heading::after {
+            content: "🌸";
+            font-size: 16px;
+            opacity: 0.75;
+            margin-left: 4px;
+        }
+        .tab-btn--mothers {
+            background: linear-gradient(135deg, #FFF0F6 0%, #F9E2EE 100%) !important;
+            border: 1.5px solid var(--berry-main) !important;
+            color: var(--plum-dark) !important;
+            box-shadow: 0 4px 12px rgba(158, 59, 129, 0.15);
+        }
+        .tab-btn--mothers:hover, .tab-btn--mothers.active {
+            background: linear-gradient(135deg, var(--berry-main) 0%, var(--plum-dark) 100%) !important;
+            color: #FFFFFF !important;
+        }
+        .hero-slide--mothers::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: 
+                linear-gradient(90deg, #FDF6F9 0%, rgba(253, 246, 249, 0.94) 45%, rgba(253, 246, 249, 0.15) 75%, transparent 100%),
+                url('hero-mothers-day.jpg') right center / cover no-repeat !important;
+            z-index: 1;
+        }
+
+        /* Верхняя плашка со счетчиком дней до Дня матери */
+        .mothers-countdown-bar {
+            background: linear-gradient(90deg, var(--plum-dark) 0%, var(--berry-main) 50%, var(--plum-dark) 100%);
+            color: #FFFFFF;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .countdown-Days-badge {
+            background: #FFFFFF;
+            color: var(--berry-main);
+            font-weight: 800;
+            padding: 3px 12px;
+            border-radius: 99px;
+            font-size: 13px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+            white-space: nowrap;
+        }
+        .countdown-link-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            padding: 3px 11px;
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+        .countdown-link-btn:hover { background: rgba(255, 255, 255, 0.35); }
+
+        /* Выделенная группа товаров ко Дню матери */
+        .mothers-featured-box {
+            background: linear-gradient(135deg, #FFF5F9 0%, #FDF8F5 50%, #F9E5F0 100%);
+            border: 2px solid var(--berry-light);
+            border-radius: 26px;
+            padding: 24px 22px;
+            margin: 18px 0 32px;
+            box-shadow: 0 12px 32px rgba(158, 59, 129, 0.10);
+            position: relative;
+        }
+        .mothers-featured-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .mothers-featured-header .section-heading { margin: 0 0 4px 0; color: var(--plum-dark); }
+        .mothers-featured-header .section-sub { margin: 0; }
+        .mothers-all-btn {
+            background: var(--berry-main);
+            color: #FFFFFF;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 99px;
+            font-size: 13.5px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(158, 59, 129, 0.25);
+            transition: transform 0.15s, background 0.2s;
+            white-space: nowrap;
+        }
+        .mothers-all-btn:hover { background: var(--plum-dark); transform: translateY(-1px); }
+
+        @media (max-width: 860px) {
+            body { background-attachment: scroll; }
+            .hero-slide--mothers::before {
+                inset: -10px -10px auto -10px;
+                height: min(54vw, 260px);
+                background: url('hero-mothers-day.jpg') right center / cover no-repeat !important;
+            }
+            .mothers-featured-box { padding: 16px 12px; border-radius: 20px; }
+            .mothers-all-btn { width: 100%; text-align: center; }
+        }
+        @media (max-width: 959px) {
+            .top-row {
+                background: 
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.90) 55%, rgba(255, 255, 255, 0.68) 100%),
+                    url('bg-header-mothers-day.jpg') right center / cover no-repeat !important;
+            }
+        }
         body.photo-modal-open { overflow: hidden; }
 
         @keyframes fadeSlideUp {
@@ -68,7 +204,9 @@
         .menu-section, .custom-subgroup { animation: fadeSlideUp 0.28s ease-out; }
 
         header {
-            background: rgba(255, 255, 255, 0.94);
+            background: 
+                linear-gradient(90deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.90) 25%, rgba(255, 255, 255, 0.90) 72%, rgba(255, 255, 255, 0.60) 100%),
+                url('bg-header-mothers-day.jpg') center center / cover no-repeat;
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--border-soft);
@@ -687,6 +825,12 @@
 
 <div class="toast-notification" id="toastBox"></div>
 
+<div class="mothers-countdown-bar" id="mothersCountdownBar">
+    <span>🌸 Приближается День матери! До праздника осталось:</span>
+    <span class="countdown-Days-badge" id="mothersDaysLeft">считаем дни...</span>
+    <button class="countdown-link-btn" onclick="openCustomSubgroup('sub_mothers_day')">Выбрать торт маме →</button>
+</div>
+
 <header>
     <div class="container">
         <div class="top-row">
@@ -728,6 +872,7 @@
         <div class="tabs-wrapper">
             <div class="tabs" id="categoryTabs">
                 <button class="tab-btn active" onclick="filterMenu('all', this)">Все меню</button>
+                <button class="tab-btn tab-btn--mothers" onclick="var w=document.querySelector('.tabs-wrapper'); if(w) w.classList.remove('open'); openCustomSubgroup('sub_mothers_day');">🌸 Ко Дню Матери</button>
                 <button class="tab-btn" onclick="var w=document.querySelector('.tabs-wrapper'); if(w) w.classList.remove('open'); openCustomCakeModal();">🎂 Торты на заказ</button>
                 <button class="tab-btn" onclick="filterMenu('custom', this)">🎨 Тематические торты</button>
                 <button class="tab-btn" onclick="filterMenu('whole_cakes', this)">🎂 Торты в наличии</button>
@@ -750,63 +895,96 @@
     <div class="menu-section" data-section="overview">
         <!-- СЛАЙДЕР HERO-БАННЕРА (2 СЛАЙДА ФИКСИРОВАННОГО РАЗМЕРА) -->
         <div class="hero-slider" id="heroSlider">
-            <button class="hero-arrow prev" onclick="changeHeroSlide(-1)" aria-label="Предыдущий слайд">&#10094;</button>
-            <button class="hero-arrow next" onclick="changeHeroSlide(1)" aria-label="Следующий слайд">&#10095;</button>
-
-            <!-- СЛАЙД 1: Оригинальный баннер с кондитером -->
-            <div class="hero active">
+            <!-- Праздничный баннер ко Дню матери -->
+            <div class="hero hero-slide--mothers active">
                 <div class="hero-content">
-                    <div class="hero-eyebrow">Счастье в мелочах</div>
-                    <h2>Наш главный принцип — бескомпромиссное качество собственного производства. Только натуральный вкус, отборные ингредиенты и мастерство кондитеров</h2>
-                    <p>Ознакомьтесь с нашей онлайн-витриной и заглядывайте за свежими десертами в любую из 4 кондитерских Новороссийска.</p>
+                    <div class="hero-eyebrow">🌸 Праздничная коллекция ко Дню матери</div>
+                    <h2>Скажите маме «Люблю» самым нежным десертом ручной работы</h2>
+                    <p>Трогательные праздничные торты с цветами и ягодами, воздушные меренговые рулеты и наборы моти. Выбирайте подарок для любимой мамы в наших кондитерских в Новороссийске!</p>
                     <div class="hero-actions">
-                        <button class="hero-btn-primary" onclick="openCustomCakeModal()">🎂 Обсудить индивидуальный торт</button>
-                        <button class="hero-btn-secondary" onclick="filterMenu('slices', document.querySelector('.tab-btn[onclick*=\'slices\']'))">🍰 Смотреть витрину</button>
+                        <button class="hero-btn-primary" onclick="openCustomSubgroup('sub_mothers_day')">🌸 Выбрать торт для мамы (28 вариантов)</button>
+                        <button class="hero-btn-secondary" onclick="filterMenu('whole_cakes', document.querySelector('.tab-btn[onclick*=\'whole_cakes\']'))">🎂 Торты в наличии сегодня</button>
                     </div>
                     <div class="hero-pills">
-                        <span class="hero-pill">🍰 Кусочки тортов 250 г — 300 ₽</span>
+                        <span class="hero-pill">💐 Нежная подпись на торте</span>
                         <span class="hero-pill">📍 4 уютные кондитерские в городе</span>
-                        <span class="hero-pill">🌿 Линейка без сахара</span>
+                        <span class="hero-pill">🍓 100% натуральные сливки и ягоды</span>
                     </div>
                 </div>
-            </div>
-
-            <!-- СЛАЙД 2: Гонконгские вафли -->
-            <div class="hero hero-slide--waffles">
-                <div class="hero-content">
-                    <div class="hero-eyebrow">🧇 В нашем меню</div>
-                    <h2>Гонконгские вафли — хрустящее счастье в каждом пузырьке</h2>
-                    <p>Румяная свежеиспеченная вафля, шарик нежного белого пломбира и ваш любимый джем на выбор — сочный ягодный или насыщенный шоколадный.</p>
-                    <div class="hero-actions">
-                        <button class="hero-btn-primary" onclick="filterMenu('waffles', document.querySelector('.tab-btn[onclick*=\'waffles\']'))">🧇 Перейти к Гонконгским вафлям</button>
-                        <button class="hero-btn-secondary" onclick="filterMenu('coffee', document.querySelector('.tab-btn[onclick*=\'coffee\']'))">☕ Выбрать кофе к вафле</button>
-                    </div>
-                    <div class="hero-pills">
-                        <span class="hero-pill">🍓 Ягодная или 🍫 Шоколадная — 400 ₽</span>
-                        <span class="hero-pill">🍦 С нежным белым мороженым</span>
-                        <span class="hero-pill">🔥 Выпекаем свежими</span>
-                    </div>
-                </div>
-                <div class="hero-waffles-visual" onclick="filterMenu('waffles', document.querySelector('.tab-btn[onclick*=\'waffles\']'))" style="cursor: pointer;">
-                    <div class="waffle-circle-main">
-                        <img src="Гонконгские вафли/Ягодная.jpg" style="transform: none; object-position: center;" alt="Гонконгская вафля Ягодная" onerror="this.style.display='none';">
-                    </div>
-                    <div class="waffle-circle-sub">
-                        <img src="Гонконгские вафли/Шоколадная.jpg" style="transform: none; object-position: center;" alt="Гонконгская вафля Шоколадная" onerror="this.style.display='none';">
-                    </div>
-                    <div class="waffle-price-tag">Всего 400 ₽</div>
-                </div>
-            </div>
-
-            <div class="hero-nav-dots">
-                <button class="hero-dot active" onclick="goToHeroSlide(0)" aria-label="Слайд 1"></button>
-                <button class="hero-dot" onclick="goToHeroSlide(1)" aria-label="Слайд 2"></button>
             </div>
         </div>
 <!-- СЕКЦИЯ: СВЕЖИЕ НОВОСТИ И СТОРИС ИЗ ВК -->
         <h3 class="section-heading" style="margin-top: 10px;">✨ Свежие новости и новинки</h3>
         <p class="section-sub" style="margin-bottom: 10px;">Нажмите на кружочек, чтобы посмотреть свежие публикации из нашего сообщества ВКонтакте</p>
         <div class="stories-bar" id="vkStoriesBar"></div>
+        <!-- ВЫДЕЛЕННАЯ ГРУППА ТОВАРОВ КО ДНЮ МАТЕРИ -->
+        <div class="mothers-featured-box">
+            <div class="mothers-featured-header">
+                <div>
+                    <h3 class="section-heading">💐 Лучшие торты ко Дню Матери</h3>
+                    <p class="section-sub">Самые популярные оформления для любимых мам — внутри любая начинка и вес на ваш выбор</p>
+                </div>
+                <button class="mothers-all-btn" onclick="openCustomSubgroup('sub_mothers_day')">Смотреть все 28 вариантов →</button>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
+                        <span class="badge b-hit">🌸 Хит для мамы</span>
+                        <img src="Тематические/День матери/229.jpg" alt="Торт ко Дню Матери №229" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Торт ко Дню Матери №229</div>
+                        <div class="card-desc">Любая начинка и вес на ваш выбор</div>
+                        <div class="card-footer">
+                            <button class="buy-btn" onclick="addToCart('Заказ: Торт ко Дню Матери №229', 0, this)">Выбрать дизайн</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
+                        <span class="badge b-hit">🌸 К празднику</span>
+                        <img src="Тематические/День матери/242.jpg" alt="Торт ко Дню Матери №242" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Торт ко Дню Матери №242</div>
+                        <div class="card-desc">Любая начинка и вес на ваш выбор</div>
+                        <div class="card-footer">
+                            <button class="buy-btn" onclick="addToCart('Заказ: Торт ко Дню Матери №242', 0, this)">Выбрать дизайн</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
+                        <span class="badge b-gold">💐 Нежный декор</span>
+                        <img src="Тематические/День матери/245.jpg" alt="Торт ко Дню Матери №245" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Торт ко Дню Матери №245</div>
+                        <div class="card-desc">Любая начинка и вес на ваш выбор</div>
+                        <div class="card-footer">
+                            <button class="buy-btn" onclick="addToCart('Заказ: Торт ко Дню Матери №245', 0, this)">Выбрать дизайн</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
+                        <span class="badge b-hit">❤️ Любимой маме</span>
+                        <img src="Тематические/День матери/240.jpg" alt="Торт ко Дню Матери №240" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Торт ко Дню Матери №240</div>
+                        <div class="card-desc">Любая начинка и вес на ваш выбор</div>
+                        <div class="card-footer">
+                            <button class="buy-btn" onclick="addToCart('Заказ: Торт ко Дню Матери №240', 0, this)">Выбрать дизайн</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- СЕКЦИЯ: ГЛАВНЫЙ КАТАЛОГ (ГРУППЫ ТОВАРОВ) -->
         <h3 class="section-heading">🛍️ Меню кондитерской</h3>
         <p class="section-sub">Выберите нужную категорию, чтобы посмотреть ассортимент</p>
@@ -3650,6 +3828,42 @@
             }, {passive: true});
         }
     });
+// Автоматический счетчик дней до Дня матери (последнее воскресенье ноября)
+    (function updateMothersDayCountdown() {
+        var badge = document.getElementById('mothersDaysLeft');
+        if (!badge) return;
+
+        var now = new Date();
+        var year = now.getFullYear();
+
+        function getLastSundayOfNovember(y) {
+            var d = new Date(y, 10, 30); // 30 ноября
+            d.setDate(30 - d.getDay());
+            d.setHours(23, 59, 59, 999);
+            return d;
+        }
+
+        var target = getLastSundayOfNovember(year);
+        if (now > target) {
+            target = getLastSundayOfNovember(year + 1);
+        }
+
+        var todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        var targetStart = new Date(target.getFullYear(), target.getMonth(), target.getDate());
+        var diffDays = Math.round((targetStart - todayStart) / (1000 * 60 * 60 * 24));
+
+        if (diffDays === 0) {
+            badge.textContent = 'Сегодня праздник! 💐';
+        } else {
+            var n = Math.abs(diffDays) % 100;
+            var n1 = n % 10;
+            var word = 'дней';
+            if (n > 10 && n < 20) word = 'дней';
+            else if (n1 > 1 && n1 < 5) word = 'дня';
+            else if (n1 === 1) word = 'день';
+            badge.textContent = diffDays + ' ' + word;
+        }
+    })();
 </script>
 </body>
 </html>
