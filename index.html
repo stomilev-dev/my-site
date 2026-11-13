@@ -819,6 +819,249 @@
         .story-date { font-size: 11.5px; font-weight: 700; color: var(--berry-main); }
         .story-text { font-size: 13.5px; color: var(--text-main); line-height: 1.5; white-space: pre-line; }
         .story-footer-btns { display: flex; gap: 8px; margin-top: 6px; }
+/* === БАННЕР-КАРТОЧКА НОВИНКИ И СТАТЬЯ-ОБЗОР === */
+        .novelty-banner-card {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            background: linear-gradient(135deg, #2D1630 0%, #4A154B 55%, #6B2259 100%);
+            color: #FFFFFF;
+            border-radius: 26px;
+            overflow: hidden;
+            margin: 18px 0 32px;
+            box-shadow: 0 14px 36px rgba(45, 22, 48, 0.22);
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            border: 2px solid rgba(212, 132, 184, 0.35);
+        }
+        .novelty-banner-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 44px rgba(45, 22, 48, 0.32);
+        }
+        .novelty-banner-img {
+            width: 100%;
+            height: 100%;
+            min-height: 250px;
+            overflow: hidden;
+            position: relative;
+            background: #F9E5F0;
+        }
+        .novelty-banner-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.45s ease;
+        }
+        .novelty-banner-card:hover .novelty-banner-img img {
+            transform: scale(1.06);
+        }
+        .novelty-banner-body {
+            padding: 28px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 12px;
+        }
+        .novelty-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            align-self: flex-start;
+            background: linear-gradient(135deg, var(--gold-accent), #D6AD42);
+            color: #FFFFFF;
+            font-size: 11.5px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            padding: 5px 14px;
+            border-radius: 99px;
+        }
+        .novelty-banner-title {
+            font-family: var(--font-logo);
+            font-size: 26px;
+            line-height: 1.2;
+            color: #FFFFFF;
+        }
+        .novelty-banner-desc {
+            font-size: 14px;
+            line-height: 1.55;
+            color: rgba(255, 255, 255, 0.88);
+            max-width: 620px;
+        }
+        .novelty-banner-footer {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 6px;
+        }
+        .novelty-read-btn {
+            background: #FFFFFF;
+            color: var(--plum-dark);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 99px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        }
+        .novelty-read-btn:hover {
+            background: var(--bg-pink);
+            transform: translateY(-1px);
+        }
+        .novelty-price-hint {
+            font-size: 15px;
+            font-weight: 800;
+            color: #FBF5E6;
+        }
+
+        /* Оформление самой статьи */
+        .article-box {
+            background: #FFFFFF;
+            border: 1px solid var(--border-soft);
+            border-radius: 26px;
+            padding: 32px;
+            box-shadow: var(--shadow);
+            max-width: 960px;
+            margin: 10px auto 30px;
+        }
+        .article-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid var(--border-soft);
+        }
+        .article-hero-img {
+            border-radius: 22px;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            box-shadow: 0 10px 28px rgba(58, 25, 64, 0.12);
+            cursor: zoom-in;
+        }
+        .article-hero-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .article-title {
+            font-family: var(--font-logo);
+            font-size: 30px;
+            color: var(--plum-dark);
+            line-height: 1.2;
+            margin: 10px 0 14px;
+        }
+        .article-lead {
+            font-size: 15px;
+            line-height: 1.65;
+            color: var(--text-main);
+            margin-bottom: 18px;
+        }
+        .article-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 12px;
+            margin: 24px 0;
+        }
+        .article-highlight-item {
+            background: var(--bg-pink);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
+            padding: 14px 16px;
+            font-size: 13px;
+            line-height: 1.45;
+            color: var(--plum-dark);
+        }
+        .article-highlight-item b {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 4px;
+            color: var(--berry-main);
+        }
+        .article-story-step {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: center;
+            margin: 28px 0;
+            background: var(--bg-cream);
+            border-radius: 22px;
+            padding: 20px;
+            border: 1px solid var(--border-soft);
+        }
+        .article-story-step.reverse {
+            direction: rtl;
+        }
+        .article-story-step.reverse > * {
+            direction: ltr;
+        }
+        .article-step-img {
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            cursor: zoom-in;
+        }
+        .article-step-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+        .article-step-img:hover img {
+            transform: scale(1.04);
+        }
+        .article-step-text h4 {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--plum-dark);
+            margin-bottom: 8px;
+        }
+        .article-step-text p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+        .article-cta-box {
+            margin-top: 34px;
+            background: linear-gradient(135deg, #FFF5F9 0%, #F9E5F0 100%);
+            border: 2px solid var(--berry-light);
+            border-radius: 22px;
+            padding: 26px;
+            text-align: center;
+        }
+        .article-cta-box h4 {
+            font-family: var(--font-logo);
+            font-size: 24px;
+            color: var(--plum-dark);
+            margin-bottom: 8px;
+        }
+        .article-cta-box p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+        }
+        .article-cta-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        @media (max-width: 768px) {
+            .novelty-banner-card { grid-template-columns: 1fr; }
+            .novelty-banner-img { min-height: 220px; max-height: 260px; }
+            .novelty-banner-body { padding: 20px 18px; }
+            .novelty-banner-title { font-size: 22px; }
+            .article-box { padding: 18px 14px; }
+            .article-hero, .article-story-step { grid-template-columns: 1fr; gap: 16px; }
+            .article-story-step.reverse { direction: ltr; }
+            .article-title { font-size: 24px; }
+        }
     </style>
 </head>
 <body>
@@ -985,6 +1228,23 @@
             </div>
         </div>
 
+<!-- <!-- ПРЯМОУГОЛЬНАЯ КАРТОЧКА НОВИНКИ С ПЕРЕХОДОМ НА СТАТЬЮ -->
+        <div class="novelty-banner-card" onclick="filterMenu('article_choco_cake')">
+            <div class="novelty-banner-img">
+                <img src="Кусочки тортов/Шоколадный Торт.jpg" alt="Новинка: Шоколадный торт" loading="lazy">
+            </div>
+            <div class="novelty-banner-body">
+                <span class="novelty-tag">✨ Главная новинка меню</span>
+                <h3 class="novelty-banner-title">Порционный «Шоколадный торт» — тройное шоколадное удовольствие</h3>
+                <p class="novelty-banner-desc">
+                    Пористый влажный бисквит на темном какао, воздушный шоколадно-сливочный крем и густой глянцевый ганаш из настоящего бельгийского шоколада. Нажмите, чтобы узнать секрет его приготовления!
+                </p>
+                <div class="novelty-banner-footer">
+                    <button class="novelty-read-btn" onclick="event.stopPropagation(); filterMenu('article_choco_cake')">📖 Читать обзор и выбрать →</button>
+                    <span class="novelty-price-hint">250 г • 400 ₽</span>
+                </div>
+            </div>
+        </div>
         <!-- СЕКЦИЯ: ГЛАВНЫЙ КАТАЛОГ (ГРУППЫ ТОВАРОВ) -->
         <h3 class="section-heading">🛍️ Меню кондитерской</h3>
         <p class="section-sub">Выберите нужную категорию, чтобы посмотреть ассортимент</p>
@@ -1238,11 +1498,119 @@
         </div>
     </div>
 
+<!-- СЕКЦИЯ: СТАТЬЯ-ОБЗОР НОВИНКИ «ШОКОЛАДНЫЙ ТОРТ» -->
+    <div class="menu-section" data-section="article_choco_cake" style="display: none;">
+        <div class="back-to-cats-bar">
+            <button class="back-to-cats-btn" onclick="filterMenu('all', document.querySelector('.tab-btn'))">← Вернуться на главную</button>
+            <span style="font-size: 12.5px; color: var(--text-muted);">Обзор новинки • Кондитерская «Счастье в мелочах»</span>
+        </div>
+
+        <div class="article-box">
+            <div class="article-hero">
+                <div class="article-hero-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Кусочки тортов/Шоколадный Торт.jpg" alt="Шоколадный торт">
+                </div>
+                <div>
+                    <span class="novelty-tag" style="margin-bottom: 8px;">🍫 Новинка витрины</span>
+                    <h2 class="article-title">Шоколадный торт, который тает во рту с первой ложечки</h2>
+                    <p class="article-lead">
+                        Мы создали десерт специально для тех, кто влюблен в глубокий, насыщенный вкус настоящего шоколада без приторной сладости. Удобный порционный формат позволяет наслаждаться любимым тортом где угодно — у нас в кондитерской с чашечкой кофе или дома.
+                    </p>
+                    <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+                        <span class="price" style="font-size: 22px;">400 ₽ <span style="font-size: 13px; font-weight: 600; color: var(--text-muted);">/ порция 250 г</span></span>
+                        <button class="hero-btn-primary" onclick="addToCart('Кусочек торта «Шоколадный» (250 г)', 400, this)">+ Выбрать</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-highlights">
+                <div class="article-highlight-item">
+                    <b>🍫 Бельгийский шоколад</b>
+                    Используем только натуральный темный и молочный шоколад с богатым ароматом какао-бобов.
+                </div>
+                <div class="article-highlight-item">
+                    <b>🥛 Натуральные сливки</b>
+                    Нежнейший крем взбивается на свежих животных сливках без растительных заменителей.
+                </div>
+                <div class="article-highlight-item">
+                    <b>🧁 Сочный бисквит</b>
+                    Пористые шоколадные коржи буквально пропитаны сливочно-шоколадной нежностью.
+                </div>
+            </div>
+
+            <div class="article-story-step">
+                <div class="article-step-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Обзор/Шоколадный Торт/1.jpg" alt="Идеальные слои шоколадного торта" loading="lazy">
+                </div>
+                <div class="article-step-text">
+                    <h4>1. Гармония в каждом слое</h4>
+                    <p>
+                        Посмотрите на этот разрез: мы чередуем воздушный пористый шоколадный бисквит с щедрым слоем бархатистого крема. Благодаря прозрачной креманке вы сразу видите всю красоту и сочность десерта.
+                    </p>
+                </div>
+            </div>
+
+            <div class="article-story-step reverse">
+                <div class="article-step-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Обзор/Шоколадный Торт/2.jpg" alt="Натуральные ингредиенты для шоколадного торта" loading="lazy">
+                </div>
+                <div class="article-step-text">
+                    <h4>2. Только честные и натуральные ингредиенты</h4>
+                    <p>
+                        Секрет вкуса кроется в исходных продуктах: кусковой бельгийский шоколад, отборный алкализованный какао-порошок, свежие фермерские сливки и выпеченный вручную невесомый бисквит.
+                    </p>
+                </div>
+            </div>
+
+            <div class="article-story-step">
+                <div class="article-step-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Обзор/Шоколадный Торт/3.jpg" alt="Ручная сборка шоколадного торта" loading="lazy">
+                </div>
+                <div class="article-step-text">
+                    <h4>3. Бережная ручная сборка</h4>
+                    <p>
+                        Каждая порция собирается нашими кондитерами вручную. Мы не жалеем крема и покрываем верх десерта гладким глянцевым шоколадным ганашем, чтобы каждый кусочек был максимально пропитанным.
+                    </p>
+                </div>
+            </div>
+
+            <div class="article-story-step reverse">
+                <div class="article-step-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Обзор/Шоколадный Торт/4.jpg" alt="Нежная текстура шоколадного торта" loading="lazy">
+                </div>
+                <div class="article-step-text">
+                    <h4>4. Нежнейшая муссовая текстура</h4>
+                    <p>
+                        Ложечка легко погружается сквозь тягучий шоколадный верх прямо в мягкий бисквит и сливочный крем. Этот десерт идеально сочетается с классическим капучино, эспрессо или несладким чаем.
+                    </p>
+                </div>
+            </div>
+
+            <div class="article-cta-box">
+                <h4>Хотите попробовать нашу новинку уже сегодня?</h4>
+                <p>Добавьте «Шоколадный торт» в свой список выбора и забронируйте к вашему визиту в удобной кондитерской!</p>
+                <div class="article-cta-buttons">
+                    <button class="hero-btn-primary" onclick="addToCart('Кусочек торта «Шоколадный» (250 г)', 400, this)">+ Выбрать (400 ₽)</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- СЕКЦИЯ: КУСОЧКИ ТОРТОВ -->
     <div class="menu-section" data-section="slices" style="display: none;">
         <h3 class="section-heading">🍰 Кусочки тортов (250 г • 300 ₽)</h3>
         <p class="section-sub">Большая сытная порция на натуральных сливках и сливочном чиз-креме</p>
         <div class="grid">
+<div class="card">
+                <div class="card-img" onclick="filterMenu('article_choco_cake')">
+                    <span class="badge b-hit">✨ Новинка • Обзор</span><span class="weight-tag">250 г</span>
+                    <img src="Кусочки тортов/Шоколадный Торт.jpg" alt="Торт «Шоколадный»" loading="lazy" decoding="async" onerror="this.style.display='none'; this.parentElement.innerText='🍫';">
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Торт «Шоколадный»</div>
+                    <div class="card-desc">Влажный шоколадный бисквит, нежный крем на сливках и ганаш из бельгийского шоколада. <b style="color:var(--berry-main); cursor:pointer;" onclick="filterMenu('article_choco_cake')">Читать обзор →</b></div>
+                    <div class="card-footer"><span class="price">400 ₽</span><button class="buy-btn" onclick="addToCart('Кусочек торта «Шоколадный» (250 г)', 400, this)">+ Выбрать</button></div>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
                     <span class="badge b-plum">Карамель-арахис</span><span class="weight-tag">250 г</span>
