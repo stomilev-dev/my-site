@@ -1063,18 +1063,27 @@
             .article-title { font-size: 24px; }
         }
 
-        /* Сетка из 2 обзоров рядом (Журнальный разворот) */
+        /* Прокрутка обзоров в один ряд */
         .novelty-reviews-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
             align-items: stretch;
-            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 18px;
+            padding: 6px 4px 16px;
             margin: 14px 0 32px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--berry-main) var(--bg-pink);
         }
+        .novelty-reviews-grid::-webkit-scrollbar { height: 8px; }
+        .novelty-reviews-grid::-webkit-scrollbar-track { background: var(--bg-pink); border-radius: 10px; }
+        .novelty-reviews-grid::-webkit-scrollbar-thumb { background-color: var(--berry-main); border-radius: 10px; }
         .novelty-reviews-grid .novelty-banner-card {
+            flex: 0 0 540px;
             grid-template-columns: 215px 1fr;
             margin: 0;
-            height: 100%;
+            height: auto;
+            scroll-snap-align: start;
         }
         .novelty-reviews-grid .novelty-banner-body {
             padding: 22px 24px;
@@ -1144,6 +1153,87 @@
                 scroll-snap-align: start;
             }
         }
+    /* Аккуратный поиск по сайту */
+        .site-search-wrap {
+            position: relative;
+            max-width: 680px;
+            margin: 4px auto 14px;
+            display: flex;
+            align-items: center;
+        }
+        .site-search-input {
+            width: 100%;
+            padding: 11px 42px 11px 40px;
+            border-radius: 99px;
+            border: 1.5px solid var(--border-soft);
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--text-main);
+            font-size: 13.5px;
+            font-weight: 600;
+            outline: none;
+            box-shadow: 0 4px 16px rgba(58, 25, 64, 0.05);
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+        .site-search-input::placeholder { color: var(--text-muted); font-weight: 500; }
+        .site-search-input:focus {
+            border-color: var(--berry-main);
+            background: #FFFFFF;
+            box-shadow: 0 6px 22px rgba(158, 59, 129, 0.14);
+        }
+        .site-search-icon {
+            position: absolute;
+            left: 14px;
+            font-size: 15px;
+            pointer-events: none;
+            opacity: 0.75;
+        }
+        .site-search-clear {
+            position: absolute;
+            right: 10px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: none;
+            background: var(--bg-pink);
+            color: var(--berry-main);
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .site-search-clear:hover { background: var(--berry-main); color: #FFFFFF; }
+        .search-cat-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .search-cat-chip {
+            background: var(--bg-pink);
+            color: var(--berry-main);
+            border: 1px solid var(--border-soft);
+            padding: 7px 14px;
+            border-radius: 99px;
+            font-size: 12.5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .search-cat-chip:hover { background: var(--berry-main); color: #FFFFFF; }
+        .search-link-btn {
+            background: var(--bg-cream);
+            color: var(--plum-dark);
+            border: 1px solid var(--border-soft);
+            padding: 8px 11px;
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .search-link-btn:hover { background: var(--bg-pink); color: var(--berry-main); }
     </style>
 </head>
 <body>
@@ -1217,6 +1307,13 @@
 </header>
 
 <main class="container">
+    <div class="site-search-wrap">
+        <span class="site-search-icon">🔍</span>
+        <input type="text" id="siteSearchInput" class="site-search-input" placeholder="Поиск: номер торта (напр. 186) или название десерта..." oninput="handleSiteSearch(this.value)">
+        <button type="button" id="siteSearchClear" class="site-search-clear" onclick="clearSiteSearch()">&times;</button>
+    </div>
+    <div id="siteSearchResults" class="menu-section" data-section="search_results" style="display: none;"></div>
+
     <div class="menu-section" data-section="overview">
         <!-- СЛАЙДЕР HERO-БАННЕРА (2 СЛАЙДА ФИКСИРОВАННОГО РАЗМЕРА) -->
         <div class="hero-slider" id="heroSlider">
@@ -1310,10 +1407,27 @@
             </div>
         </div>
 
-<!-- ДВЕ КАРТОЧКИ НОВИНОК С ПЕРЕХОДОМ НА СТАТЬИ-ОБЗОРЫ -->
+<!-- КАРТОЧКИ НОВИНОК С ПЕРЕХОДОМ НА СТАТЬИ-ОБЗОРЫ -->
         <h3 class="section-heading">📖 Обзоры наших новинок</h3>
         <p class="section-sub">Нажмите на карточку, чтобы заглянуть внутрь десерта и узнать секреты его приготовления</p>
         <div class="novelty-reviews-grid">
+            <!-- Карточка 0: Биг батончик Сникерс -->
+            <div class="novelty-banner-card" style="background: linear-gradient(135deg, #3B1E13 0%, #6E3A1E 55%, #A6652E 100%);" onclick="filterMenu('article_big_snickers')">
+                <div class="novelty-banner-img">
+                    <img src="Обзор/Биг батончик сникерс/В разрезе.jpg" alt="Новинка: Биг батончик Сникерс" loading="lazy">
+                </div>
+                <div class="novelty-banner-body">
+                    <span class="novelty-tag">🥜 Хит-новинка • Гигантский размер</span>
+                    <h3 class="novelty-banner-title">Биг батончик «Сникерс» — тот самый вкус, только в пять раз больше!</h3>
+                    <p class="novelty-banner-desc">
+                        Шоколадный бисквит, море обжаренного арахиса в домашней карамели, воздушная нуга и щедрое глазирование в настоящем бельгийском шоколаде. В фирменной подарочной коробочке!
+                    </p>
+                    <div class="novelty-banner-footer">
+                        <button class="novelty-read-btn" onclick="event.stopPropagation(); filterMenu('article_big_snickers')">📖 Читать обзор →</button>
+                        <span class="novelty-price-hint">3000 ₽</span>
+                    </div>
+                </div>
+            </div>
             <!-- Карточка 1: Мотикейк -->
             <div class="novelty-banner-card novelty-banner-card--berry" onclick="filterMenu('article_mochicake')">
                 <div class="novelty-banner-img">
@@ -1805,11 +1919,138 @@
             </div>
         </div>
     </div>
+    <!-- СЕКЦИЯ: СТАТЬЯ-ОБЗОР НОВИНКИ «БИГ БАТОНЧИК СНИКЕРС» -->
+    <div class="menu-section" data-section="article_big_snickers" style="display: none;">
+        <div class="back-to-cats-bar">
+            <button class="back-to-cats-btn" onclick="filterMenu('all', document.querySelector('.tab-btn'))">← Вернуться на главную</button>
+            <span style="font-size: 12.5px; color: var(--text-muted);">Обзор новинки • Кондитерская «Счастье в мелочах»</span>
+        </div>
+
+        <div class="article-box">
+            <div class="article-hero">
+                <div class="article-hero-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Обзор/Биг батончик сникерс/В разрезе.jpg" alt="Биг батончик Сникерс">
+                </div>
+                <div>
+                    <span class="novelty-tag" style="margin-bottom: 8px;">🥜 Хит-новинка • Ручная работа</span>
+                    <h2 class="article-title">Гигантский батончик «Сникерс» — тот самый вкус, только в пять раз больше!</h2>
+                    <p class="article-lead">
+                        Вы когда-нибудь мечтали о «Сникерсе», который не закончится через пару укусов? Мы воплотили эту мечту в реальность! Встречайте наш фирменный Биг батончик «Сникерс» — это не просто десерт, а целое гастрономическое событие для истинных сладкоежек и идеальный подарок для тех, кто вам дорог.
+                    </p>
+                    <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+                        <span class="price" style="font-size: 22px;">3000 ₽</span>
+                        <button class="hero-btn-primary" onclick="addToCart('Биг батончик «Сникерс»', 3000, this)">+ Выбрать</button>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="font-size: 20px; font-weight: 800; color: var(--plum-dark); margin-bottom: 8px;">Из чего складывается магия нашего гиганта?</h3>
+            <p class="article-lead" style="margin-bottom: 20px;">
+                Мы готовим его полностью вручную, сохраняя любимое сочетание, но выводя его на совершенно новый уровень качества и масштаба.
+            </p>
+
+            <div class="article-highlights">
+                <div class="article-highlight-item">
+                    <b>🥜 Арахис и карамель</b>
+                    Отборный бережно обжаренный арахис, тягучая домашняя карамель и воздушная нуга.
+                </div>
+                <div class="article-highlight-item">
+                    <b>🍫 Бельгийский шоколад</b>
+                    Купаем батончик в растопленном молочном шоколаде для хрустящей корочки.
+                </div>
+                <div class="article-highlight-item">
+                    <b>🎁 Готовый подарок</b>
+                    Упакован в нашу фирменную коробочку с рукавом «Счастье в мелочах».
+                </div>
+            </div>
+
+            <div class="article-story-step">
+                <div class="article-step-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Обзор/Биг батончик сникерс/Ингредиенты.jpg" alt="Лучшие ингредиенты для Биг батончика Сникерс" loading="lazy">
+                </div>
+                <div class="article-step-text">
+                    <h4>1. Лучшие ингредиенты</h4>
+                    <p>
+                        Наша основа — это только натуральные и премиальные продукты. Горсть отборного, бережно обжаренного хрустящего арахиса, домашняя тягучая карамель, нежнейшая воздушная нуга, насыщенный шоколадный бисквит и, конечно же, настоящий бельгийский молочный шоколад.
+                    </p>
+                </div>
+            </div>
+
+            <div class="article-story-step reverse">
+                <div class="article-step-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Обзор/Биг батончик сникерс/Сборка.jpg" alt="Бережная сборка Биг батончика Сникерс" loading="lazy">
+                </div>
+                <div class="article-step-text">
+                    <h4>2. Бережная сборка</h4>
+                    <p>
+                        Каждый слой укладывается вручную. На темную бисквитную основу мы щедро выкладываем золотистую карамель с морем арахиса, а сверху накрываем плотным, но невероятно нежным слоем домашней нуги.
+                    </p>
+                </div>
+            </div>
+
+            <div class="article-story-step">
+                <div class="article-step-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Обзор/Биг батончик сникерс/Глазирование.jpg" alt="Шоколадный водопад — глазирование батончика" loading="lazy">
+                </div>
+                <div class="article-step-text">
+                    <h4>3. Шоколадный водопад (Глазирование)</h4>
+                    <p>
+                        Мы не просто покрываем батончик глазурью — мы буквально купаем его в растопленном бельгийском шоколаде, создавая ту самую легендарную «волну» и хрустящую корочку.
+                    </p>
+                </div>
+            </div>
+
+            <div class="article-story-step reverse">
+                <div class="article-step-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Обзор/Биг батончик сникерс/В разрезе.jpg" alt="Биг батончик Сникерс в разрезе" loading="lazy">
+                </div>
+                <div class="article-step-text">
+                    <h4>4. Невероятный разрез</h4>
+                    <p>
+                        Только посмотрите на этот разрез! Каждый кусочек — это идеальный баланс текстур: от мягкого бисквита и тягучей карамели до воздушной нуги и хрустящих орехов в шоколадном панцире. Этот десерт приятно не только есть, но и рассматривать.
+                    </p>
+                </div>
+            </div>
+
+            <div class="article-story-step">
+                <div class="article-step-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Обзор/Биг батончик сникерс/Упаковка.jpg" alt="Фирменная упаковка Биг батончика Сникерс" loading="lazy">
+                </div>
+                <div class="article-step-text">
+                    <h4>5. С любовью — в коробке</h4>
+                    <p>
+                        Мы бережно упаковываем каждый Биг батончик в нашу фирменную коробочку с рукавом «СЧАСТЬЕ В МЕЛОЧАХ». Это готовый, стильный и очень вкусный подарок, который гарантированно вызовет восторг и улыбку.
+                    </p>
+                </div>
+            </div>
+
+            <div class="article-cta-box">
+                <h4>Подарите себе и близким настоящее сладкое безумие!</h4>
+                <p>Попробуйте наш Биг «Сникерс» и убедитесь сами: счастье действительно кроется в деталях... и в очень больших батончиках!</p>
+                <div class="article-cta-buttons">
+                    <button class="hero-btn-primary" onclick="addToCart('Биг батончик «Сникерс»', 3000, this)">+ Выбрать (3000 ₽)</button>
+                    <button class="hero-btn-secondary" onclick="filterMenu('article_mochicake')">📖 Читать также: Обзор на «Мотикейк» →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- СЕКЦИЯ: КУСОЧКИ ТОРТОВ -->
     <div class="menu-section" data-section="slices" style="display: none;">
-        <h3 class="section-heading">🍰 Кусочки тортов (250 г • 300 ₽)</h3>
+        <h3 class="section-heading">🍰 Кусочки тортов (250 г • 400 ₽)</h3>
         <p class="section-sub">Большая сытная порция на натуральных сливках и сливочном чиз-креме</p>
         <div class="grid">
+<div class="card">
+                <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <span class="badge b-hit">Новинка</span><span class="weight-tag">250 г</span>
+                    <img src="Кусочки тортов/Трайфл кайфл.jpg" alt="Трайфл кайфл" loading="lazy" decoding="async" onerror="this.style.display='none'; this.parentElement.innerText='🍰';">
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Трайфл кайфл</div>
+                    <div class="card-desc">Жидкий бельгийский шоколад, нежный чиз-крем, малина и банан.</div>
+                    <div class="card-footer"><span class="price">400 ₽</span><button class="buy-btn" onclick="addToCart('Трайфл кайфл (250 г)', 300, this)">+ Выбрать</button></div>
+                </div>
+            </div>
 <div class="card">
                 <div class="card-img" onclick="filterMenu('article_choco_cake')">
                     <span class="badge b-hit">✨ Новинка • Обзор</span><span class="weight-tag">250 г</span>
@@ -2037,6 +2278,17 @@
         <div class="grid">
             <div class="card">
                 <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <span class="badge b-hit">Новинка</span>
+                    <img src="Корпусные/Эм-энд-эмс.jpg" alt="Корпусный десерт Эм-энд-эмс" loading="lazy" decoding="async" onerror="this.style.display='none'; this.parentElement.innerText='🍫';">
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Десерт «Эм-энд-эмс»</div>
+                    <div class="card-desc">Нежный мусс и шоколадная начинка в тонком корпусе из бельгийского шоколада.</div>
+                    <div class="card-footer"><span class="price">400 ₽</span><button class="buy-btn" onclick="addToCart('Корпусный десерт Эм-энд-эмс', 400, this)">+ Выбрать</button></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
                     <span class="badge b-gold">Нежный</span>
                     <img src="Корпусные/17.jpg" alt="Корпусный десерт Рафаэлло" loading="lazy" decoding="async" onerror="this.style.display='none'; this.parentElement.innerText='🥥';">
                 </div>
@@ -2206,6 +2458,39 @@
                     <div class="card-title">Десерт «Мотикейк»</div>
                     <div class="card-desc">Нежный творожный чизкейк с ягодной прослойкой, укутанный в тягучее рисовое тесто моти. <b style="color:var(--berry-main); cursor:pointer;" onclick="filterMenu('article_mochicake')">Читать обзор →</b></div>
                     <div class="card-footer"><span class="price">400 ₽</span><button class="buy-btn" onclick="addToCart('Десерт «Мотикейк»', 400, this)">+ Выбрать</button></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <span class="badge b-gold">Новинка • Манго</span>
+                    <img src="Моти/Мотикейк манго.jpg" alt="Мотикейк «Манго»" loading="lazy" decoding="async" onerror="this.style.display='none'; this.parentElement.innerText='🥭';">
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Мотикейк «Манго»</div>
+                    <div class="card-desc">Нежный творожный чизкейк с тропической прослойкой из спелого манго, укутанный в тягучее рисовое тесто моти.</div>
+                    <div class="card-footer"><span class="price">400 ₽</span><button class="buy-btn" onclick="addToCart('Мотикейк «Манго»', 400, this)">+ Выбрать</button></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <span class="badge b-pp">Новинка • Фисташка</span>
+                    <img src="Моти/Мотикейк фисташка.jpg" alt="Мотикейк «Фисташка»" loading="lazy" decoding="async" onerror="this.style.display='none'; this.parentElement.innerText='💚';">
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Мотикейк «Фисташка»</div>
+                    <div class="card-desc">Нежный творожный чизкейк с благородным фисташковым вкусом, укутанный в тягучее рисовое тесто моти.</div>
+                    <div class="card-footer"><span class="price">400 ₽</span><button class="buy-btn" onclick="addToCart('Мотикейк «Фисташка»', 400, this)">+ Выбрать</button></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <span class="badge b-plum">Новинка • Черника</span>
+                    <img src="Моти/Мотикейк черника.jpg" alt="Мотикейк «Черника»" loading="lazy" decoding="async" onerror="this.style.display='none'; this.parentElement.innerText='🫐';">
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Мотикейк «Черника»</div>
+                    <div class="card-desc">Нежный творожный чизкейк с яркой черничной прослойкой, укутанный в тягучее рисовое тесто моти.</div>
+                    <div class="card-footer"><span class="price">400 ₽</span><button class="buy-btn" onclick="addToCart('Мотикейк «Черника»', 400, this)">+ Выбрать</button></div>
                 </div>
             </div>
             <div class="card">
@@ -2430,6 +2715,17 @@
         <h3 class="section-heading">🍩 Шоколадные десерты и эскимо</h3>
         <p class="section-sub">Любимые лакомства на основе настоящего бельгийского шоколада</p>
         <div class="grid">
+            <div class="card">
+                <div class="card-img" onclick="filterMenu('article_big_snickers')">
+                    <span class="badge b-hit">✨ Новинка • Обзор</span>
+                    <img src="Обзор/Биг батончик сникерс/Упаковка.jpg" alt="Биг батончик «Сникерс»" loading="lazy" decoding="async" onerror="this.style.display='none'; this.parentElement.innerText='🍫';">
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Биг батончик «Сникерс»</div>
+                    <div class="card-desc">Гигантский батончик ручной работы с арахисом, карамелью, нугой и бельгийским шоколадом в подарочной коробочке. <b style="color:var(--berry-main); cursor:pointer;" onclick="filterMenu('article_big_snickers')">Читать обзор →</b></div>
+                    <div class="card-footer"><span class="price">3000 ₽</span><button class="buy-btn" onclick="addToCart('Биг батончик «Сникерс»', 3000, this)">+ Выбрать</button></div>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
                     <span class="badge b-gold">Премиум</span>
@@ -4361,7 +4657,7 @@
         selectBranch('ул. Анапское шоссе, 29');
 
         // Прокрутка колесиком мыши для карусели свадебных тортов и отзывов на ПК
-        var carousels = document.querySelectorAll('.carousel-container, #reviewsGridContainer');
+        var carousels = document.querySelectorAll('.carousel-container, #reviewsGridContainer, .novelty-reviews-grid');
         for (var c = 0; c < carousels.length; c++) {
             (function(el) {
                 el.addEventListener('wheel', function(e) {
@@ -4453,6 +4749,337 @@
             badge.textContent = diffDays + ' ' + word;
         }
     })();
+
+    // === ПОИСК ПО САЙТУ И ПРЯМЫЕ ССЫЛКИ НА КАТЕГОРИИ ===
+    function copyDirectLink(hashPart) {
+        var base = window.location.href.split('#')[0];
+        var fullUrl = hashPart ? (base + '#' + hashPart) : base;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(fullUrl).then(function() {
+                showToast('🔗 Ссылка скопирована!');
+            });
+        } else {
+            var ta = document.createElement('textarea');
+            ta.value = fullUrl;
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); showToast('🔗 Ссылка скопирована!'); } catch (e) {}
+            document.body.removeChild(ta);
+        }
+    }
+
+    function clearSiteSearch() {
+        var inp = document.getElementById('siteSearchInput');
+        var clr = document.getElementById('siteSearchClear');
+        var res = document.getElementById('siteSearchResults');
+        if (inp) inp.value = '';
+        if (clr) clr.style.display = 'none';
+        if (res) res.style.display = 'none';
+        if (currentNavState && currentNavState.view === 'sub') {
+            window.openCustomSubgroup(currentNavState.id, true);
+        } else {
+            var cat = (currentNavState && currentNavState.id) ? currentNavState.id : 'all';
+            window.filterMenu(cat, findTabBtnByCategory(cat), true);
+        }
+    }
+
+    function handleSiteSearch(rawQuery) {
+        var clr = document.getElementById('siteSearchClear');
+        var resBox = document.getElementById('siteSearchResults');
+        if (!resBox) return;
+
+        var trimmed = (rawQuery || '').trim();
+        if (!trimmed) {
+            clearSiteSearch();
+            return;
+        }
+        if (clr) clr.style.display = 'flex';
+
+        var sections = document.querySelectorAll('.menu-section');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].style.display = 'none';
+        }
+        resBox.style.display = 'block';
+
+        var norm = function(s) { return (s || '').toLowerCase().replace(/ё/g, 'е'); };
+        var q = norm(trimmed);
+        var words = q.split(/\s+/).filter(Boolean);
+        var numMatch = q.match(/\d+/);
+        var targetNum = numMatch ? parseInt(numMatch[0], 10) : null;
+
+        // 1. Поиск тортов на заказ и свадебных по номеру
+        var cakeMatches = [];
+        if (targetNum !== null) {
+            var allCatalogs = [];
+            for (var key in customSubgroupConfigs) {
+                if (customSubgroupConfigs.hasOwnProperty(key)) {
+                    var cfg = customSubgroupConfigs[key];
+                    allCatalogs.push({
+                        id: key,
+                        type: 'sub',
+                        title: cfg.title,
+                        ranges: cfg.ranges,
+                        folder: gridFolders[cfg.gridId] || ''
+                    });
+                }
+            }
+            allCatalogs.push({
+                id: 'wedding_grid',
+                type: 'cat',
+                title: 'Свадебный торт',
+                ranges: weddingRanges,
+                folder: gridFolders['weddingCakesGrid'] || ''
+            });
+
+            // Сначала точное совпадение номера (например, 186)
+            for (var c = 0; c < allCatalogs.length; c++) {
+                var catObj = allCatalogs[c];
+                for (var r = 0; r < catObj.ranges.length; r++) {
+                    if (targetNum >= catObj.ranges[r][0] && targetNum <= catObj.ranges[r][1]) {
+                        cakeMatches.push({
+                            num: targetNum,
+                            exact: true,
+                            title: catObj.title + ' №' + targetNum,
+                            catTitle: catObj.title,
+                            folder: catObj.folder,
+                            type: catObj.type,
+                            id: catObj.id
+                        });
+                    }
+                }
+            }
+
+            // Если точного нет и введено от 2 цифр — показываем начинающиеся на эти цифры
+            if (cakeMatches.length === 0 && String(targetNum).length >= 2) {
+                var prefix = String(targetNum);
+                for (var c2 = 0; c2 < allCatalogs.length && cakeMatches.length < 12; c2++) {
+                    var catObj2 = allCatalogs[c2];
+                    for (var r2 = 0; r2 < catObj2.ranges.length && cakeMatches.length < 12; r2++) {
+                        for (var n = catObj2.ranges[r2][0]; n <= catObj2.ranges[r2][1] && cakeMatches.length < 12; n++) {
+                            if (String(n).indexOf(prefix) === 0) {
+                                cakeMatches.push({
+                                    num: n,
+                                    exact: false,
+                                    title: catObj2.title + ' №' + n,
+                                    catTitle: catObj2.title,
+                                    folder: catObj2.folder,
+                                    type: catObj2.type,
+                                    id: catObj2.id
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // 2. Поиск подходящих категорий
+        var catChips = [];
+        var tabBtns = document.querySelectorAll('#categoryTabs .tab-btn');
+        for (var t = 0; t < tabBtns.length; t++) {
+            var tb = tabBtns[t];
+            var oncl = tb.getAttribute('onclick') || '';
+            var mCat = oncl.match(/filterMenu\('([^']+)'/);
+            if (mCat && mCat[1] !== 'all' && norm(tb.textContent).indexOf(q) !== -1) {
+                catChips.push({ label: tb.textContent.trim(), action: "filterMenu('" + mCat[1] + "')" });
+            }
+        }
+        var subLabels = {
+            'sub_kids': '🦄 Детские торты',
+            'sub_8march': '🌷 К 8 Марта и для женщин',
+            'sub_mothers_day': '❤️ Ко Дню Матери',
+            'sub_23feb': '⭐️ Для мужчин и 23 Февраля',
+            'sub_valentines': '❤️ Для влюбленных (14 Февраля)',
+            'sub_father': '👔 День отца',
+            'sub_1sept': '🍁 1 Сентября',
+            'sub_teacher': '📚 День учителя',
+            'sub_tutor': '🧸 День воспитателя',
+            'sub_karavay': '🍞 Каравай',
+            'sub_newyear': '🎄 Новый год',
+            'sub_easter': '🥚 Пасха'
+        };
+        for (var sk in subLabels) {
+            if (subLabels.hasOwnProperty(sk) && norm(subLabels[sk]).indexOf(q) !== -1) {
+                catChips.push({ label: subLabels[sk], action: "openCustomSubgroup('" + sk + "')" });
+            }
+        }
+
+        // 3. Поиск по десертам и напиткам из витрины
+        var productSections = ['whole_cakes', 'slices', 'meringue', 'corpus', 'mochi_mac', 'chocolate', 'pp', 'waffles', 'coffee'];
+        var matchedCards = [];
+        for (var ps = 0; ps < productSections.length; ps++) {
+            var secEl = document.querySelector('.menu-section[data-section="' + productSections[ps] + '"]');
+            if (!secEl) continue;
+            var cards = secEl.querySelectorAll('.card');
+            for (var k = 0; k < cards.length; k++) {
+                var card = cards[k];
+                var tEl = card.querySelector('.card-title');
+                var dEl = card.querySelector('.card-desc');
+                var hay = norm((tEl ? tEl.textContent : '') + ' ' + (dEl ? dEl.textContent : ''));
+                var allMatch = true;
+                for (var w = 0; w < words.length; w++) {
+                    if (hay.indexOf(words[w]) === -1) { allMatch = false; break; }
+                }
+                if (allMatch) matchedCards.push(card);
+            }
+        }
+
+        // Отрисовка результатов
+        resBox.innerHTML = '';
+        var header = document.createElement('div');
+        header.className = 'back-to-cats-bar';
+        header.innerHTML = '<span style="font-weight:800; font-size:15px; color:var(--plum-dark);">🔍 Результаты по запросу «' + trimmed.replace(/</g, '&lt;') + '»</span>' +
+                           '<button class="back-to-cats-btn" onclick="clearSiteSearch()">✕ Закрыть поиск</button>';
+        resBox.appendChild(header);
+
+        if (catChips.length > 0) {
+            var chipsWrap = document.createElement('div');
+            chipsWrap.className = 'search-cat-chips';
+            for (var cc = 0; cc < catChips.length; cc++) {
+                chipsWrap.innerHTML += '<button class="search-cat-chip" onclick="' + catChips[cc].action + '">' + catChips[cc].label + ' →</button>';
+            }
+            resBox.appendChild(chipsWrap);
+        }
+
+        var grid = document.createElement('div');
+        grid.className = 'grid';
+
+        for (var cm = 0; cm < cakeMatches.length; cm++) {
+            var item = cakeMatches[cm];
+            var imgPath = (item.folder ? item.folder + '/' : '') + item.num + '.jpg';
+            var openAction = item.type === 'sub' ? ("openCustomSubgroup('" + item.id + "')") : ("filterMenu('" + item.id + "')");
+            var errAttr = item.exact
+                ? "this.style.display='none'; this.parentElement.innerText='🎂';"
+                : "this.closest('.card').style.display='none';";
+            var cDiv = document.createElement('div');
+            cDiv.className = 'card';
+            cDiv.innerHTML =
+                '<div class="card-img" onclick="openPhotoModal(this.querySelector(\'img\'))">' +
+                    '<span class="badge b-hit">№' + item.num + '</span>' +
+                    '<img src="' + imgPath + '" alt="' + item.title + '" loading="lazy" onerror="' + errAttr + '">' +
+                '</div>' +
+                '<div class="card-body">' +
+                    '<div class="card-title">' + item.title + '</div>' +
+                    '<div class="card-desc">Раздел: <b style="color:var(--berry-main); cursor:pointer;" onclick="' + openAction + '">' + item.catTitle + ' →</b></div>' +
+                    '<div class="card-footer">' +
+                        '<button class="buy-btn" onclick="addToCart(\'Заказ: ' + item.title + '\', 0, this)">Выбрать</button>' +
+                        '<button class="search-link-btn" title="Скопировать ссылку на торт" onclick="copyDirectLink(\'cake-' + item.num + '\')">🔗</button>' +
+                    '</div>' +
+                '</div>';
+            grid.appendChild(cDiv);
+        }
+
+        for (var mc = 0; mc < matchedCards.length; mc++) {
+            var clone = matchedCards[mc].cloneNode(true);
+            var sel = clone.querySelector('select.card-select');
+            if (sel) {
+                sel.removeAttribute('id');
+                var pr = clone.querySelector('.price');
+                if (pr) pr.removeAttribute('id');
+                (function(s, p, cl) {
+                    s.onchange = function() { if (p) p.textContent = s.value + ' ₽'; };
+                    var b = cl.querySelector('.buy-btn');
+                    var ct = cl.querySelector('.card-title') ? cl.querySelector('.card-title').textContent : '';
+                    if (b) {
+                        b.onclick = function() {
+                            var opt = s.options[s.selectedIndex];
+                            addToCart(ct + ' (' + (opt.getAttribute('data-label') || '') + ')', parseInt(s.value, 10) || 0, b);
+                        };
+                    }
+                })(sel, pr, clone);
+            }
+            grid.appendChild(clone);
+        }
+
+        if (cakeMatches.length === 0 && matchedCards.length === 0 && catChips.length === 0) {
+            var empty = document.createElement('p');
+            empty.style.cssText = 'padding:24px; text-align:center; background:#fff; border-radius:18px; color:var(--text-muted); font-size:14px; border:1px solid var(--border-soft);';
+            empty.textContent = 'Ничего не найдено. Попробуйте ввести номер торта (например, 186) или название десерта (например, Сникерс, Моти, Наполеон).';
+            resBox.appendChild(empty);
+        } else {
+            resBox.appendChild(grid);
+        }
+    }
+
+    function openRouteFromHash() {
+        var h = decodeURIComponent((window.location.hash || '').replace(/^#/, '')).trim();
+        if (!h || h === 'all') {
+            window.filterMenu('all', findTabBtnByCategory('all'), true);
+            return;
+        }
+        if (h.indexOf('cake-') === 0) {
+            var num = h.replace('cake-', '');
+            var inp = document.getElementById('siteSearchInput');
+            if (inp) inp.value = num;
+            handleSiteSearch(num);
+            return;
+        }
+        if (h.indexOf('sub_') === 0 && customSubgroupConfigs[h]) {
+            window.openCustomSubgroup(h, true);
+            return;
+        }
+        if (document.querySelector('.menu-section[data-section="' + h + '"]')) {
+            window.filterMenu(h, findTabBtnByCategory(h), true);
+            return;
+        }
+        window.filterMenu('all', findTabBtnByCategory('all'), true);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Обновляем URL при переключении категорий и статей
+        var _origFilter = window.filterMenu;
+        window.filterMenu = function(category, btn, fromHistory) {
+            var sInp = document.getElementById('siteSearchInput');
+            var sClr = document.getElementById('siteSearchClear');
+            var sRes = document.getElementById('siteSearchResults');
+            if (sInp && sInp.value) sInp.value = '';
+            if (sClr) sClr.style.display = 'none';
+            if (sRes) sRes.style.display = 'none';
+
+            _origFilter(category, btn, fromHistory);
+
+            var targetUrl = (category === 'all')
+                ? (window.location.pathname + window.location.search)
+                : ('#' + category);
+            try {
+                if (!fromHistory && window.history && window.history.replaceState) {
+                    window.history.replaceState({ view: 'cat', id: category }, '', targetUrl);
+                }
+            } catch (e) {}
+        };
+
+        // Обновляем URL при переходе в подкатегории тематических тортов
+        var _origSub = window.openCustomSubgroup;
+        window.openCustomSubgroup = function(subId, fromHistory) {
+            var sInp = document.getElementById('siteSearchInput');
+            var sClr = document.getElementById('siteSearchClear');
+            var sRes = document.getElementById('siteSearchResults');
+            if (sInp && sInp.value) sInp.value = '';
+            if (sClr) sClr.style.display = 'none';
+            if (sRes) sRes.style.display = 'none';
+
+            _origSub(subId, fromHistory);
+
+            try {
+                if (!fromHistory && window.history && window.history.replaceState) {
+                    window.history.replaceState({ view: 'sub', id: subId }, '', '#' + subId);
+                }
+            } catch (e) {}
+        };
+
+        // Если сайт открыли сразу по прямой ссылке с #...
+        if (window.location.hash) {
+            openRouteFromHash();
+        }
+
+        window.addEventListener('hashchange', function() {
+            if (typeof isAnyModalOpen === 'function' && isAnyModalOpen()) return;
+            var h = decodeURIComponent((window.location.hash || '').replace(/^#/, '')).trim() || 'all';
+            if (!currentNavState || currentNavState.id !== h) {
+                openRouteFromHash();
+            }
+        });
+    });
 </script>
 </body>
 </html>
