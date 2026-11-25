@@ -1324,7 +1324,7 @@
                     <h2>Скажите маме «Люблю» самым нежным десертом ручной работы</h2>
                     <p>Трогательные праздничные торты с цветами и ягодами, воздушные меренговые рулеты и наборы моти. Выбирайте подарок для любимой мамы в наших кондитерских в Новороссийске!</p>
                     <div class="hero-actions">
-                        <button class="hero-btn-primary" onclick="openCustomSubgroup('sub_mothers_day')">🌸 Выбрать торт для мамы (28 вариантов)</button>
+                        <button class="hero-btn-primary" onclick="openCustomSubgroup('sub_mothers_day')">🌸 Выбрать торт для мамы (32 варианта)</button>
                         <button class="hero-btn-secondary" onclick="filterMenu('whole_cakes', document.querySelector('.tab-btn[onclick*=\'whole_cakes\']'))">🎂 Торты в наличии сегодня</button>
                     </div>
                     <div class="hero-pills">
@@ -1346,9 +1346,64 @@
                     <h3 class="section-heading">💐 Лучшие торты ко Дню Матери</h3>
                     <p class="section-sub">Самые популярные оформления для любимых мам — внутри любая начинка и вес на ваш выбор</p>
                 </div>
-                <button class="mothers-all-btn" onclick="openCustomSubgroup('sub_mothers_day')">Смотреть все 28 вариантов →</button>
+                <button class="mothers-all-btn" onclick="openCustomSubgroup('sub_mothers_day')">Смотреть все 32 варианта →</button>
             </div>
             <div class="grid">
+                <div class="card">
+                    <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
+                        <span class="badge b-hit">🌸 Новинка</span>
+                        <img src="Тематические/День матери/257.jpg" alt="Торт ко Дню Матери №257" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Торт ко Дню Матери №257</div>
+                        <div class="card-desc">Любая начинка и вес на ваш выбор</div>
+                        <div class="card-footer">
+                            <button class="buy-btn" onclick="addToCart('Заказ: Торт ко Дню Матери №257', 0, this)">Выбрать дизайн</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
+                        <span class="badge b-hit">💐 Новинка</span>
+                        <img src="Тематические/День матери/258.jpg" alt="Торт ко Дню Матери №258" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Торт ко Дню Матери №258</div>
+                        <div class="card-desc">Любая начинка и вес на ваш выбор</div>
+                        <div class="card-footer">
+                            <button class="buy-btn" onclick="addToCart('Заказ: Торт ко Дню Матери №258', 0, this)">Выбрать дизайн</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
+                        <span class="badge b-gold">🌸 Новинка</span>
+                        <img src="Тематические/День матери/259.jpg" alt="Торт ко Дню Матери №259" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Торт ко Дню Матери №259</div>
+                        <div class="card-desc">Любая начинка и вес на ваш выбор</div>
+                        <div class="card-footer">
+                            <button class="buy-btn" onclick="addToCart('Заказ: Торт ко Дню Матери №259', 0, this)">Выбрать дизайн</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
+                        <span class="badge b-hit">❤️ Новинка</span>
+                        <img src="Тематические/День матери/260.jpg" alt="Торт ко Дню Матери №260" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">Торт ко Дню Матери №260</div>
+                        <div class="card-desc">Любая начинка и вес на ваш выбор</div>
+                        <div class="card-footer">
+                            <button class="buy-btn" onclick="addToCart('Заказ: Торт ко Дню Матери №260', 0, this)">Выбрать дизайн</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="card">
                     <div class="card-img" onclick="openPhotoModal(this.querySelector('img'))">
                         <span class="badge b-hit">🌸 Хит для мамы</span>
@@ -1411,10 +1466,28 @@
         <h3 class="section-heading">📖 Обзоры наших новинок</h3>
         <p class="section-sub">Нажмите на карточку, чтобы заглянуть внутрь десерта и узнать секреты его приготовления</p>
         <div class="novelty-reviews-grid">
+            <!-- Карточка: Биг батончик Киндер Кантри -->
+            <div class="novelty-banner-card" style="background: linear-gradient(135deg, #5C3317 0%, #9A5B25 55%, #C88A3B 100%);" onclick="filterMenu('article_big_kinder_country')">
+                <div class="novelty-banner-img">
+                    <img src="Обзор/Биг батончик КИНДЕР КАНТРИ/Упаковка.jpg" alt="Новинка: Биг батончик Киндер Кантри" loading="lazy">
+                </div>
+                <div class="novelty-banner-body">
+                    <span class="novelty-tag">🌾 Хит-новинка • Гигантский размер</span>
+                    <h3 class="novelty-banner-title">Биг батончик «Киндер Кантри» — любимый вкус детства в грандиозном формате!</h3>
+                    <p class="novelty-banner-desc">
+                        Нежный молочно-сливочный крем с воздушными злаками, темный шоколадный бисквит и хрустящая глазурь из бельгийского молочного шоколада. В подарочной коробочке!
+                    </p>
+                    <div class="novelty-banner-footer">
+                        <button class="novelty-read-btn" onclick="event.stopPropagation(); filterMenu('article_big_kinder_country')">📖 Читать обзор →</button>
+                        <span class="novelty-price-hint">3000 ₽</span>
+                    </div>
+                </div>
+            </div>
+
             <!-- Карточка 0: Биг батончик Сникерс -->
             <div class="novelty-banner-card" style="background: linear-gradient(135deg, #3B1E13 0%, #6E3A1E 55%, #A6652E 100%);" onclick="filterMenu('article_big_snickers')">
                 <div class="novelty-banner-img">
-                    <img src="Обзор/Биг батончик сникерс/В разрезе.jpg" alt="Новинка: Биг батончик Сникерс" loading="lazy">
+                    <img src="Обзор/Биг батончик сникерс/Упаковка.jpg" alt="Новинка: Биг батончик Сникерс" loading="lazy">
                 </div>
                 <div class="novelty-banner-body">
                     <span class="novelty-tag">🥜 Хит-новинка • Гигантский размер</span>
@@ -2030,6 +2103,122 @@
                 <div class="article-cta-buttons">
                     <button class="hero-btn-primary" onclick="addToCart('Биг батончик «Сникерс»', 3000, this)">+ Выбрать (3000 ₽)</button>
                     <button class="hero-btn-secondary" onclick="filterMenu('article_mochicake')">📖 Читать также: Обзор на «Мотикейк» →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- СЕКЦИЯ: СТАТЬЯ-ОБЗОР НОВИНКИ «БИГ БАТОНЧИК КИНДЕР КАНТРИ» -->
+    <div class="menu-section" data-section="article_big_kinder_country" style="display: none;">
+        <div class="back-to-cats-bar">
+            <button class="back-to-cats-btn" onclick="filterMenu('all', document.querySelector('.tab-btn'))">← Вернуться на главную</button>
+            <span style="font-size: 12.5px; color: var(--text-muted);">Обзор новинки • Кондитерская «Счастье в мелочах»</span>
+        </div>
+
+        <div class="article-box">
+            <div class="article-hero">
+                <div class="article-hero-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Обзор/Биг батончик КИНДЕР КАНТРИ/В разрезе.jpg" alt="Биг батончик Киндер Кантри">
+                </div>
+                <div>
+                    <span class="novelty-tag" style="margin-bottom: 8px;">🌾 Хит-новинка • Ручная работа</span>
+                    <h2 class="article-title">Гигантский батончик «Киндер Кантри» — любимый вкус детства в грандиозном формате!</h2>
+                    <p class="article-lead">
+                        Если вы обожаете нежный молочный шоколад и хрустящие воздушные злаки, у нас для вас потрясающая новость! Встречайте наш фирменный Биг батончик «Киндер Кантри» — это огромная, невероятно нежная и хрустящая интерпретация легендарного лакомства, созданная для того, чтобы дарить искреннюю радость и делиться ею с близкими.
+                    </p>
+                    <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+                        <span class="price" style="font-size: 22px;">3000 ₽</span>
+                        <button class="hero-btn-primary" onclick="addToCart('Биг батончик «Киндер Кантри»', 3000, this)">+ Выбрать</button>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="font-size: 20px; font-weight: 800; color: var(--plum-dark); margin-bottom: 8px;">Что внутри нашего гиганта? Пошаговая магия создания:</h3>
+            <p class="article-lead" style="margin-bottom: 20px;">
+                Мы готовим его полностью вручную по особому рецепту, чтобы бережно передать тот самый знакомый с детства молочно-злаковый вкус, но в потрясающем биг-формате!
+            </p>
+
+            <div class="article-highlights">
+                <div class="article-highlight-item">
+                    <b>🌾 Воздушные злаки</b>
+                    Отборная пшеница и рис в пышном натуральном молочно-сливочном креме.
+                </div>
+                <div class="article-highlight-item">
+                    <b>🍫 Бельгийский шоколад</b>
+                    Щедрая глазурь из растопленного молочного шоколада с хрустящей корочкой.
+                </div>
+                <div class="article-highlight-item">
+                    <b>🎁 Готовый подарок</b>
+                    Фирменная коробочка с ярким рукавом «Счастье в мелочах» для детей и взрослых.
+                </div>
+            </div>
+
+            <div class="article-story-step">
+                <div class="article-step-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Обзор/Биг батончик КИНДЕР КАНТРИ/Ингредиенты.jpg" alt="Натуральные ингредиенты для Биг батончика Киндер Кантри" loading="lazy">
+                </div>
+                <div class="article-step-text">
+                    <h4>1. Натуральные ингредиенты</h4>
+                    <p>
+                        Всё начинается с отборных продуктов премиум-качества. Мы используем щедрую порцию легких воздушных злаков (пшеница и рис), натуральное молоко и сливки для крема, настоящий бельгийский молочный шоколад и наш фирменный темный шоколадный бисквит, который служит идеальной основой. Никаких искусственных добавок — только чистый вкус!
+                    </p>
+                </div>
+            </div>
+
+            <div class="article-story-step reverse">
+                <div class="article-step-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Обзор/Биг батончик КИНДЕР КАНТРИ/Сборка.jpg" alt="Бережная сборка Биг батончика Киндер Кантри" loading="lazy">
+                </div>
+                <div class="article-step-text">
+                    <h4>2. Бережная сборка</h4>
+                    <p>
+                        Слой за слоем мы создаем эту нежную историю. На основу из темного шоколадного бисквита мы выкладываем супер-густой, пышный слой молочного крема, буквально усыпанного хрустящими воздушными злаками. Сверху накрываем вторым бисквитным пластом, чтобы зафиксировать форму и сделать текстуру контрастной и богатой.
+                    </p>
+                </div>
+            </div>
+
+            <div class="article-story-step">
+                <div class="article-step-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Обзор/Биг батончик КИНДЕР КАНТРИ/Глазирование.jpg" alt="Шоколадный водопад — глазирование Биг батончика Киндер Кантри" loading="lazy">
+                </div>
+                <div class="article-step-text">
+                    <h4>3. Шоколадный водопад (Глазирование)</h4>
+                    <p>
+                        Собранный батончик мы отправляем на решетку и щедро заливаем растопленным бельгийским молочным шоколадом. Он обволакивает десерт со всех сторон, создавая ту самую классическую «волну» и хрустящую шоколадную корочку.
+                    </p>
+                </div>
+            </div>
+
+            <div class="article-story-step reverse">
+                <div class="article-step-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Обзор/Биг батончик КИНДЕР КАНТРИ/В разрезе.jpg" alt="Биг батончик Киндер Кантри в разрезе" loading="lazy">
+                </div>
+                <div class="article-step-text">
+                    <h4>4. Идеальный разрез</h4>
+                    <p>
+                        Посмотрите, как это аппетитно! Каждый кусочек на срезе демонстрирует безупречные слои: тонкие шоколадно-бисквитные коржи, хрустящую глазурь и невероятно объемный, текстурный белоснежный крем, в котором отчетливо видны воздушные зерна. Это невероятно нежно, в меру сладко и очень хрустяще!
+                    </p>
+                </div>
+            </div>
+
+            <div class="article-story-step">
+                <div class="article-step-img" onclick="openPhotoModal(this.querySelector('img'))">
+                    <img src="Обзор/Биг батончик КИНДЕР КАНТРИ/Упаковка.jpg" alt="Праздничная упаковка Биг батончика Киндер Кантри" loading="lazy">
+                </div>
+                <div class="article-step-text">
+                    <h4>5. Праздничная упаковка</h4>
+                    <p>
+                        Наш Биг «Киндер Кантри» мы бережно укладываем в фирменную коробочку с ярким рукавом «СЧАСТЬЕ В МЕЛОЧАХ», украшенным колосьями и молочными брызгами. Это полностью готовый, стильный и невероятно вкусный подарок, который приведет в восторг и детей, и взрослых!
+                    </p>
+                </div>
+            </div>
+
+            <div class="article-cta-box">
+                <h4>Окунитесь в атмосферу тепла и уюта!</h4>
+                <p>Позвольте себе и своей семье окунуться в атмосферу тепла и уюта с нашим гигантским «Киндер Кантри». Ведь счастье действительно в мелочах... особенно когда этих «мелочей» так много!</p>
+                <div class="article-cta-buttons">
+                    <button class="hero-btn-primary" onclick="addToCart('Биг батончик «Киндер Кантри»', 3000, this)">+ Выбрать (3000 ₽)</button>
+                    <button class="hero-btn-secondary" onclick="filterMenu('article_big_snickers')">📖 Читать также: Обзор на Биг «Сникерс» →</button>
                 </div>
             </div>
         </div>
@@ -2716,6 +2905,17 @@
         <p class="section-sub">Любимые лакомства на основе настоящего бельгийского шоколада</p>
         <div class="grid">
             <div class="card">
+                <div class="card-img" onclick="filterMenu('article_big_kinder_country')">
+                    <span class="badge b-hit">✨ Новинка • Обзор</span>
+                    <img src="Обзор/Биг батончик КИНДЕР КАНТРИ/Упаковка.jpg" alt="Биг батончик «Киндер Кантри»" loading="lazy" decoding="async" onerror="this.style.display='none'; this.parentElement.innerText='🍫';">
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Биг батончик «Киндер Кантри»</div>
+                    <div class="card-desc">Гигантский батончик ручной работы с воздушными злаками, молочным кремом и бельгийским шоколадом в подарочной коробочке. <b style="color:var(--berry-main); cursor:pointer;" onclick="filterMenu('article_big_kinder_country')">Читать обзор →</b></div>
+                    <div class="card-footer"><span class="price">3000 ₽</span><button class="buy-btn" onclick="addToCart('Биг батончик «Киндер Кантри»', 3000, this)">+ Выбрать</button></div>
+                </div>
+            </div>
+            <div class="card">
                 <div class="card-img" onclick="filterMenu('article_big_snickers')">
                     <span class="badge b-hit">✨ Новинка • Обзор</span>
                     <img src="Обзор/Биг батончик сникерс/Упаковка.jpg" alt="Биг батончик «Сникерс»" loading="lazy" decoding="async" onerror="this.style.display='none'; this.parentElement.innerText='🍫';">
@@ -2869,7 +3069,7 @@
                 </div>
             </div>
             <div class="card" onclick="openCustomSubgroup('sub_mothers_day')" style="cursor: pointer;">
-                <div class="card-img"><span class="badge b-hit">28 вариантов</span><img src="Тематические/День матери/229.jpg" alt="Торт ко Дню Матери" loading="lazy" decoding="async"></div>
+                <div class="card-img"><span class="badge b-hit">32 варианта</span><img src="Тематические/День матери/229.jpg" alt="Торт ко Дню Матери" loading="lazy" decoding="async"></div>
                 <div class="card-body">
                     <div class="card-title">Ко Дню Матери</div>
                     <div class="card-desc">Трогательные дизайны для любимых мам.</div>
@@ -4136,7 +4336,7 @@
     var customSubgroupConfigs = {
         'sub_kids': { gridId: 'kidsCakesGrid', ranges: [[84, 123]], title: 'Детский торт' },
         'sub_8march': { gridId: 'march8CakesGrid', ranges: [[131, 228]], title: 'Торт к 8 Марта' },
-        'sub_mothers_day': { gridId: 'mothersDayCakesGrid', ranges: [[229, 256]], title: 'Торт ко Дню Матери' },
+        'sub_mothers_day': { gridId: 'mothersDayCakesGrid', ranges: [[229, 260]], title: 'Торт ко Дню Матери' },
         'sub_1sept': { gridId: 'sept1CakesGrid', ranges: [[257, 316]], title: 'Торт на 1 Сентября' },
         'sub_23feb': { gridId: 'feb23CakesGrid', ranges: [[317, 446]], title: 'Мужской торт' },
         'sub_valentines': { gridId: 'valentinesCakesGrid', ranges: [[447, 524]], title: 'Торт для влюбленных' },
